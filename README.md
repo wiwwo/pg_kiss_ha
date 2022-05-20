@@ -1,3 +1,18 @@
+# The idea
+
+The idea is simple: every instance shares a (remotely mounted) volume, with one file indicating which is the (desidered) master, and one file for each instance with its current master.
+The shell checks whether
+- it is called to be the new master
+- It is folowing the right master
+
+And acts accordingly.
+
+The check script shuold be scheduled or called on every instance at every master chamge.
+But this is routine... :-)
+
+It can de scheduled as well, since it detects instance is already in the desired state, and happily exits without doing nothing.
+
+
 # HOWTO
 
 ## Init:
