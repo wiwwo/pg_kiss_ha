@@ -177,6 +177,7 @@ dk exec -it `basename $(pwd)`-pg_red-1 bash -c "su postgres -c '/docker-entrypoi
 psql -Uwiwwo -p5445 -tq -hlocalhost postgres -c "show primary_conninfo"
 
 psql -Uwiwwo -p5446 -tq -hlocalhost postgres -c "show primary_conninfo"
+psql -Uwiwwo -p5446 -tq -hlocalhost postgres -c "select pg_is_in_recovery()";
 
 psql -Uwiwwo -p5447 -tq -hlocalhost postgres -c "show primary_conninfo"
 
