@@ -1,0 +1,67 @@
+version: "2"
+services:
+  pg_red:
+     hostname: pg_red
+     build: ./master
+     ports:
+         - "5445:5432"
+     volumes:
+         #- pg_red_data:/var/lib/postgresql/data
+         - shared_opt:/opt/pg_cluster
+     environment:
+         - POSTGRES_USER=wiwwo
+         - POSTGRES_PASSWORD=123456
+         - POSTGRES_DB=postgres
+         - PG_REP_USER=rep
+         - PG_REP_PASSWORD=123456
+         - WHOISTHIS=pg_red
+     networks:
+           - bridge-docker
+     restart: always
+  pg_green:
+     hostname: pg_green
+     build: ./slave
+     depends_on:
+         - pg_red
+     ports:
+         - "5446:5432"
+     volumes:
+         #- pg_green_data:/var/lib/postgresql/data
+         - shared_opt:/opt/pg_cluster
+     environment:
+         - POSTGRES_USER=wiwwo
+         - POSTGRES_PASSWORD=123456
+         - POSTGRES_DB=postgres
+         - PG_REP_USER=rep
+         - PG_REP_PASSWORD=123456
+         - WHOISTHIS=pg_green
+     networks:
+            - bridge-docker
+     restart: always
+  pg_blue:
+     hostname: pg_blue
+     build: ./slave
+     depends_on:
+         - pg_red
+     ports:
+         - "5447:5432"
+     volumes:
+         #- pg_blue_data:/var/lib/postgresql/data
+         - shared_opt:/opt/pg_cluster
+     environment:
+         - POSTGRES_USER=wiwwo
+         - POSTGRES_PASSWORD=123456
+         - POSTGRES_DB=postgres
+         - PG_REP_USER=rep
+         - PG_REP_PASSWORD=123456
+         - WHOISTHIS=pg_blue
+     networks:
+            - bridge-docker
+     restart: always
+volumes:
+  #pg_red_data:
+  #pg_green_data:
+  #pg_blue_data:
+  shared_opt:
+networks:
+  bridge-docker:
