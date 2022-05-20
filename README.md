@@ -31,7 +31,7 @@ $ dk exec -it `basename $(pwd)`-pg_blue-1  bash -c "su postgres -c '/docker-entr
 $ dk exec -it `basename $(pwd)`-pg_blue-1 bash -c "echo pg_green > /opt/pg_cluster/0EVERYBODYS_master_is"
 
 $ dk exec -it `basename $(pwd)`-pg_green-1 bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'"
-Master is me: pg_green = pg_green
+NEW Master is me: pg_green = pg_green
 I promote myself
 waiting for server to promote.... done
 server promoted

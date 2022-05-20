@@ -9,12 +9,11 @@ GLOBAL_MASTER=`cat /opt/pg_cluster/0EVERYBODYS_master_is`
 
 # Am I supposed to be the master?
 if [[ "$HOSTNAME" == "$GLOBAL_MASTER" ]]; then
-  echo "Master is me: $HOSTNAME = $GLOBAL_MASTER"
-
   # Am I the master already?
   PG_IN_RECOVERY=`psql -Upostgres -tq -c 'select pg_is_in_recovery();'`
 
   if [[ "${PG_IN_RECOVERY## }" == "t" ]]; then
+    echo "NEW Master is me: $HOSTNAME = $GLOBAL_MASTER"
     echo "I promote myself"
     if [[ "$USER" != "postgres" ]]; then
       su postgres -c "pg_ctl promote -D $PGDATA"
