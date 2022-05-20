@@ -4,6 +4,7 @@
 
 ```
 $ alias docker=dk
+$ docker-compose up -d
 ```
 
 ## Let's go!
