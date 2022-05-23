@@ -30,4 +30,5 @@ chmod 700 ${PGDATA} -R
 
 echo $NEW_MASTER > /opt/pg_cluster/$HOSTNAME\_master_is
 
+# Not running as entrypoint
 #while pg_isready -Upostgres >/dev/null 2>&1; do sleep 3;done

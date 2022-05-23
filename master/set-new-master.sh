@@ -27,8 +27,6 @@ fi
 
 # Here means, I am replica
 # Check if my master is already the correct one, otherwise call setup-slave.sh
-# (-Uwiwwo, since postgres seems not to be in superuser... DOH!)
-#WHOS_MASTER=`psql -Uwiwwo postgres -tq -c 'select sender_host from pg_stat_wal_receiver;'`
 WHOS_MASTER=`cat /opt/pg_cluster/$HOSTNAME\_master_is`
 if [[ "${WHOS_MASTER## }" != "$GLOBAL_MASTER" ]]; then
   echo "Old master $WHOS_MASTER"
