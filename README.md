@@ -33,9 +33,9 @@ $ dk exec -it `basename $(pwd)`-pg_blue-1 bash -c "echo pg_green > /opt/pg_clust
 ```
 $ dk exec -it `basename $(pwd)`-pg_green-1  bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'"
 
-$ dk exec -it `basename $(pwd)`-pg_red-1   bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'; sleep 3; kill 1"
+$ dk exec -it `basename $(pwd)`-pg_red-1   bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'; sleep 3"
 
-$ dk exec -it `basename $(pwd)`-pg_blue-1  bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'; sleep 3; kill 1"
+$ dk exec -it `basename $(pwd)`-pg_blue-1  bash -c "su postgres -c '/docker-entrypoint-initdb.d/set-new-master.sh GO'; sleep 3"
 
 ```
 

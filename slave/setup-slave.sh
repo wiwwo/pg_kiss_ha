@@ -13,7 +13,6 @@ do
 done
 
 rm -rf ${PGDATA} 2>/dev/null
-rm -rf ${PGDATA}/postgresql.auto.conf
 
 echo Executing: pg_basebackup
 until (pg_basebackup -h ${NEW_MASTER} -D ${PGDATA} -U ${PG_REP_USER} -vP -R -Xs)
