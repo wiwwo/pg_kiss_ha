@@ -18,5 +18,8 @@ EOF
 echo "logging_collector=on" >> $PGDATA/postgresql.conf
 echo "log_destination='stderr'" >> $PGDATA/postgresql.conf
 
-echo $HOSTNAME > /opt/pg_cluster/0EVERYBODYS_master_is
+if [ ! -f /opt/pg_cluster/0EVERYBODYS_master_is ]; then
+  echo $HOSTNAME > /opt/pg_cluster/0EVERYBODYS_master_is
+fi
+
 echo $HOSTNAME > /opt/pg_cluster/$HOSTNAME\_master_is
