@@ -1,7 +1,7 @@
 #!/bin/bash
-#NEW_MASTER=${1:-pg_red}
-GLOBAL_MASTER=`cat /opt/pg_cluster/0EVERYBODYS_master_is`
-NEW_MASTER=${1:-$GLOBAL_MASTER}
+#GLOBAL_MASTER=`cat /opt/pg_cluster/0EVERYBODYS_master_is`
+#NEW_MASTER=${1:-$GLOBAL_MASTER}
+NEW_MASTER=${1:-pg_red}
 
 if [[ "$HOSTNAME" == "$NEW_MASTER" ]]; then
   echo "Master is me: $HOSTNAME == $NEW_MASTER"
