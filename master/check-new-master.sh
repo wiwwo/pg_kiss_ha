@@ -1,4 +1,8 @@
 #!/bin/bash
 
 /docker-entrypoint-initdb.d/set-new-master.sh GO
-exit $?
+RETVAL=$?
+
+if [[ $RETVAL -ne 0 ]]; then
+  exit 1
+fi

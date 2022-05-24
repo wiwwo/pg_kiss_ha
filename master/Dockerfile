@@ -18,3 +18,6 @@ RUN rm -rf /var/lib/postgres/data/*
 
 RUN mkdir -p /opt/pg_cluster
 RUN chmod -R 777 /opt/pg_cluster
+
+HEALTHCHECK  --interval=5s --retries=1 \
+  CMD /docker-entrypoint-initdb.d/set-new-master.sh GO || exit 1

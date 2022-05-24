@@ -15,3 +15,6 @@ RUN rm -rf /var/lib/postgres/data/*
 
 #This is done automatically by /usr/local/bin/docker-entrypoint.sh
 #ENTRYPOINT ["/docker-entrypoint-initdb.d/setup-slave.sh"]
+
+HEALTHCHECK  --interval=5s --retries=1 \
+  CMD /docker-entrypoint-initdb.d/set-new-master.sh GO || exit 1

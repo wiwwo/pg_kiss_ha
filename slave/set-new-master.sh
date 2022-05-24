@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Failsafe
-
-# Failsafe
 if [[ "$1" != "GO" ]]; then
   exit 0
 fi

@@ -18,11 +18,11 @@ services:
      networks:
          - bridge-docker
      restart: always
-     healthcheck:
-         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
-         interval: 10s
-         retries: 0
-         start_period: 10s
+     #healthcheck:
+     #    test:  /bin/su postgres -c /check-new-master.sh || exit 1
+     #    interval: 10s
+     #    retries: 0
+     #    start_period: 10s
   pg_green:
      hostname: pg_green
      build: ./slave
@@ -43,12 +43,11 @@ services:
      networks:
          - bridge-docker
      restart: always
-     healthcheck:
-         #test: [ "CMD", "/bin/su", "postgres", "-c", "/docker-entrypoint-initdb.d/set-new-master.sh", "GO" ]
-         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
-         interval: 10s
-         retries: 0
-         start_period: 10s
+     #healthcheck:
+     #    test:  /bin/su postgres -c /check-new-master.sh || exit 1
+     #    interval: 10s
+     #    retries: 0
+     #    start_period: 10s
   pg_blue:
      hostname: pg_blue
      build: ./slave
@@ -69,12 +68,11 @@ services:
      networks:
          - bridge-docker
      restart: always
-     healthcheck:
-         #test: [ "CMD", "/bin/su", "postgres", "-c", "/docker-entrypoint-initdb.d/set-new-master.sh", "GO" ]
-         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
-         interval: 10s
-         retries: 0
-         start_period: 10s
+     #healthcheck:
+     #    test:  /bin/su postgres -c /check-new-master.sh || exit 1
+     #    interval: 10s
+     #    retries: 0
+     #    start_period: 10s
 volumes:
   #pg_red_data:
   #pg_green_data:
