@@ -19,6 +19,7 @@ echo "logging_collector=on" >> $PGDATA/postgresql.conf
 echo "log_destination='stderr'" >> $PGDATA/postgresql.conf
 
 if [ ! -f /opt/pg_cluster/0EVERYBODYS_master_is ]; then
+  echo "Setting myself $HOSTNAME as 0EVERYBODYS_master_is"
   echo $HOSTNAME > /opt/pg_cluster/0EVERYBODYS_master_is
 fi
 

@@ -7,6 +7,9 @@ RUN chmod +x /docker-entrypoint-initdb.d/setup-slave.sh
 COPY ./set-new-master.sh /docker-entrypoint-initdb.d/set-new-master.sh
 RUN chmod +x /docker-entrypoint-initdb.d/set-new-master.sh
 
+COPY ./check-new-master.sh /check-new-master.sh
+RUN chmod +x /check-new-master.sh
+
 
 RUN rm -rf /var/lib/postgres/data/*
 

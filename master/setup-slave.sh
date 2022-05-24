@@ -3,6 +3,14 @@
 #NEW_MASTER=${1:-$GLOBAL_MASTER}
 NEW_MASTER=${1:-pg_red}
 
+if [ $# -eq 0 ]; then
+  echo "Calling at startup, nothing to do"
+  exit 0
+fi
+
+echo -n "0EVERYBODYS_master_is = "
+cat /opt/pg_cluster/0EVERYBODYS_master_is
+
 if [[ "$HOSTNAME" == "$NEW_MASTER" ]]; then
   echo "Master is me: $HOSTNAME == $NEW_MASTER"
   exit 0

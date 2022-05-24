@@ -44,6 +44,7 @@ if [[ "${WHOS_MASTER## }" != "$GLOBAL_MASTER" ]]; then
     echo "Promoting new master (as user $USER)"
     /docker-entrypoint-initdb.d/setup-slave.sh $GLOBAL_MASTER
   fi
+  exit 1
 else
   exit 0
 fi

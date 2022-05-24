@@ -16,8 +16,13 @@ services:
          - PG_REP_PASSWORD=123456
          - WHOISTHIS=pg_red
      networks:
-           - bridge-docker
+         - bridge-docker
      restart: always
+     healthcheck:
+         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
+         interval: 10s
+         retries: 0
+         start_period: 10s
   pg_green:
      hostname: pg_green
      build: ./slave
@@ -36,8 +41,14 @@ services:
          - PG_REP_PASSWORD=123456
          - WHOISTHIS=pg_green
      networks:
-            - bridge-docker
+         - bridge-docker
      restart: always
+     healthcheck:
+         #test: [ "CMD", "/bin/su", "postgres", "-c", "/docker-entrypoint-initdb.d/set-new-master.sh", "GO" ]
+         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
+         interval: 10s
+         retries: 0
+         start_period: 10s
   pg_blue:
      hostname: pg_blue
      build: ./slave
@@ -56,8 +67,14 @@ services:
          - PG_REP_PASSWORD=123456
          - WHOISTHIS=pg_blue
      networks:
-            - bridge-docker
+         - bridge-docker
      restart: always
+     healthcheck:
+         #test: [ "CMD", "/bin/su", "postgres", "-c", "/docker-entrypoint-initdb.d/set-new-master.sh", "GO" ]
+         test: [ "CMD", "/bin/su", "postgres", "-c", "/check-new-master.sh" ]
+         interval: 10s
+         retries: 0
+         start_period: 10s
 volumes:
   #pg_red_data:
   #pg_green_data:

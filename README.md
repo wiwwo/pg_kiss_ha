@@ -7,8 +7,13 @@ The shell checks whether
 
 And acts accordingly.
 
-The check script shuold be scheduled or called on every instance at every master chamge.
-But this is routine... :-)
+I take advance of docker compose Healthcheck to run the "check if i need to do something".
+So now, failover and new master promotions are automatic :-P
+
+Still annoying: must wait 1 minute untill container restart, so they start working with new master.
+I am checking how to do within scripts or docker compose...
+
+
 
 It can de scheduled as well, since it detects instance is already in the desired state, and happily exits without doing nothing.
 
@@ -216,6 +221,14 @@ psql -Uwiwwo -p5447 -hlocalhost postgres -c "insert into x2 select 1;"
 
 psql -Uwiwwo -p5447 -hlocalhost postgres -c "insert into x2 select 1;"
 
+```
+
+Healtcheck logging:
+
+```
+dk inspect --format "{{json .State.Health }}" pg_kiss_ha-pg_red-1 | jq
+dk inspect --format "{{json .State.Health }}" pg_kiss_ha-pg_green-1 | jq
+dk inspect --format "{{json .State.Health }}" pg_kiss_ha-pg_blue-1 | jq
 ```
 
 # Sources
