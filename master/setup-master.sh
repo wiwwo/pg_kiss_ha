@@ -18,6 +18,5 @@ EOF
 echo "logging_collector=on" >> $PGDATA/postgresql.conf
 echo "log_destination='stderr'" >> $PGDATA/postgresql.conf
 
-
-echo pg_red > /opt/pg_cluster/0EVERYBODYS_master_is
-echo pg_red > /opt/pg_cluster/pg_red_master_is
+echo $HOSTNAME > /opt/pg_cluster/0EVERYBODYS_master_is
+echo $HOSTNAME > /opt/pg_cluster/$HOSTNAME\_master_is
