@@ -32,10 +32,12 @@ if [[ "${WHOS_MASTER## }" != "$GLOBAL_MASTER" ]]; then
   echo "Old master $WHOS_MASTER"
   echo "New master $GLOBAL_MASTER"
   NEWMASTER_IN_RECOVERY=`psql -Upostgres -h$GLOBAL_MASTER -tq -c 'select pg_is_in_recovery();'`
-  if [[ "${NEWMASTER_IN_RECOVERY## }" == "t" ]]; then
-    echo "New master $GLOBAL_MASTER is preforming recovery! Exiting"
-    exit 1
-  fi
+  until [[ "${NEWMASTER_IN_RECOVERY## }" != "t" ]]
+  do
+    echo "Waiting for master ${GLOBAL_MASTER} to be ready..."
+    sleep 1s
+    NEWMASTER_IN_RECOVERY=`psql -Upostgres -h$GLOBAL_MASTER -tq -c 'select pg_is_in_recovery();'`
+  done
 
   if [[ "$USER" != "postgres" ]]; then
     echo "Promoting new master (as user $USER)"
